@@ -1,0 +1,5 @@
+main: "com.github.derpynewbie.timedeconomy"
+name: "TimedEconomy"
+description: "Gives players money each configurable ticks"
+version: "1.0.0-SNAPSHOT"
+api-version: "1.14"

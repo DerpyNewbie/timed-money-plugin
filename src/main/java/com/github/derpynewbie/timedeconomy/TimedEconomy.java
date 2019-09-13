@@ -2,6 +2,7 @@ package com.github.derpynewbie.timedeconomy;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -49,7 +50,7 @@ public class TimedEconomy extends JavaPlugin implements Listener {
                 double bal = config.getDouble("balance");
                 getEconomy().bankDeposit(PLAYER.getName(), bal);
                 // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
-                PLAYER.sendMessage(String.format(MESSAGE, PLAYER.getDisplayName(), bal, TICK / 20, TICK / 20 / 60));
+                PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
             }
         };
 
@@ -67,9 +68,9 @@ public class TimedEconomy extends JavaPlugin implements Listener {
     }
 
     private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
+//        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+//            return false;
+//        }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
             return false;

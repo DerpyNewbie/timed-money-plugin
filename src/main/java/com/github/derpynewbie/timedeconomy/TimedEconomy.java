@@ -1,12 +1,14 @@
 package com.github.derpynewbie.timedeconomy;
 
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TimedEconomy extends JavaPlugin {
 
     private static Economy econ = null;
+    private static FileConfiguration config = null;
 
     @Override
     public void onDisable() {
@@ -21,6 +23,13 @@ public class TimedEconomy extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        setupConfig();
+
+    }
+
+    private void setupConfig() {
+        saveDefaultConfig();
+        config = getConfig();
     }
 
     private boolean setupEconomy() {
@@ -37,5 +46,9 @@ public class TimedEconomy extends JavaPlugin {
 
     public static Economy getEconomy() {
         return econ;
+    }
+
+    public static FileConfiguration getPluginConfig() {
+        return config;
     }
 }

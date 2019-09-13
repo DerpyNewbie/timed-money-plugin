@@ -1,0 +1,4 @@
+# The time until player gets balance
+tick: 1200
+# The balance in double
+balance: 1

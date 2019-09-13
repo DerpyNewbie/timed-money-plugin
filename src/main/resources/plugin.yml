@@ -1,5 +1,7 @@
-main: "com.github.derpynewbie.timedeconomy"
+main: "com.github.derpynewbie.timedeconomy.TimedEconomy"
 name: "TimedEconomy"
 description: "Gives players money each configurable ticks"
+depend: [Vault]
+load: "POSTWORLD"
 version: "1.0.0-SNAPSHOT"
 api-version: "1.14"

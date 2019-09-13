@@ -46,8 +46,10 @@ public class TimedEconomy extends JavaPlugin implements Listener {
         Scheduler scheduler = new Scheduler(event.getPlayer(), config.getLong("tick"), config.getString("message")) {
             @Override
             public void run() {
-                getEconomy().bankDeposit(PLAYER.getName(), config.getDouble("balance"));
-                PLAYER.sendMessage(MESSAGE);
+                double bal = config.getDouble("balance");
+                getEconomy().bankDeposit(PLAYER.getName(), bal);
+                // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
+                PLAYER.sendMessage(String.format(MESSAGE, PLAYER.getDisplayName(), bal, TICK / 20, TICK / 20 / 60));
             }
         };
 

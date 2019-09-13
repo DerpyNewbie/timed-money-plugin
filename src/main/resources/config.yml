@@ -2,3 +2,5 @@
 tick: 1200
 # The balance in double
 balance: 1
+# The message when balance sent (1st arg = displayname[String], 2nd arg = balance[Double], 3rd arg = time in seconds[Double], 4th arg = time in minutes[Double])
+message: "&aYou have received %2$1.1f by playing %4$1.1f minutes!"

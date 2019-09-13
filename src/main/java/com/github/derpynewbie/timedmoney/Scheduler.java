@@ -1,4 +1,4 @@
-package com.github.derpynewbie.timedeconomy;
+package com.github.derpynewbie.timedmoney;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public abstract class Scheduler implements Runnable {
     public Integer schedule() {
         if (taskId != null)
             deleteTask(this);
-        taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(TimedEconomy.getInstance(), this, TICK, TICK);
+        taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(TimedMoney.getInstance(), this, TICK, TICK);
         schedulers.put(PLAYER, taskId);
         return taskId;
     }

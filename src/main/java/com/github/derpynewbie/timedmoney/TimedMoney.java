@@ -1,4 +1,4 @@
-package com.github.derpynewbie.timedeconomy;
+package com.github.derpynewbie.timedmoney;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -13,10 +13,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TimedEconomy extends JavaPlugin implements Listener {
+public class TimedMoney extends JavaPlugin implements Listener {
 
     private static Economy econ = null;
-    private static TimedEconomy instance = null;
+    private static TimedMoney instance = null;
     private static FileConfiguration config = null;
 
     @Override
@@ -87,7 +87,7 @@ public class TimedEconomy extends JavaPlugin implements Listener {
         return config;
     }
 
-    public static TimedEconomy getInstance() {
+    public static TimedMoney getInstance() {
         return instance;
     }
 }

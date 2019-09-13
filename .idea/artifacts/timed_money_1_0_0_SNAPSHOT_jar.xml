@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="timed-money-1.0.0-SNAPSHOT:jar">
+    <output-path>D:/Test Server/plugins</output-path>
+    <root id="archive" name="timedmoney.jar">
+      <element id="module-output" name="timedmoney" />
+    </root>
+  </artifact>
+</component>

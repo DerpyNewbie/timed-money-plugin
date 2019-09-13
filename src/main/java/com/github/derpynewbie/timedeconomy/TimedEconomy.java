@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class TimedEconomy extends JavaPlugin {
 
     private static Economy econ = null;
+    private static TimedEconomy instance = null;
     private static FileConfiguration config = null;
 
     @Override
@@ -18,6 +19,8 @@ public class TimedEconomy extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+        instance = this;
+
         if (!setupEconomy()) {
             getLogger().severe("Vault not found.");
             getServer().getPluginManager().disablePlugin(this);
@@ -50,5 +53,9 @@ public class TimedEconomy extends JavaPlugin {
 
     public static FileConfiguration getPluginConfig() {
         return config;
+    }
+
+    public static TimedEconomy getInstance() {
+        return instance;
     }
 }

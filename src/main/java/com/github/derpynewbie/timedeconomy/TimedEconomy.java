@@ -1,11 +1,18 @@
 package com.github.derpynewbie.timedeconomy;
 
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TimedEconomy extends JavaPlugin {
+public class TimedEconomy extends JavaPlugin implements Listener {
 
     private static Economy econ = null;
     private static TimedEconomy instance = null;
@@ -14,6 +21,10 @@ public class TimedEconomy extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
+        for (Player p :
+                Scheduler.getScheduledPlayers()) {
+            Scheduler.deleteTask(p);
+        }
     }
 
     @Override
@@ -27,7 +38,25 @@ public class TimedEconomy extends JavaPlugin {
             return;
         }
         setupConfig();
+        Bukkit.getPluginManager().registerEvents(this, this);
+    }
 
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Scheduler scheduler = new Scheduler(event.getPlayer(), config.getLong("tick"), config.getString("message")) {
+            @Override
+            public void run() {
+                getEconomy().bankDeposit(PLAYER.getName(), config.getDouble("balance"));
+                PLAYER.sendMessage(MESSAGE);
+            }
+        };
+
+        scheduler.schedule();
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Scheduler.deleteTask(event.getPlayer());
     }
 
     private void setupConfig() {

@@ -1,5 +1,7 @@
 main: "com.github.derpynewbie.timedeconomy.TimedEconomy"
 name: "TimedEconomy"
+author: "DerpyNewbie"
+website: "https://github.com/derpynewbie"
 description: "Gives players money each configurable ticks"
 depend: [Vault]
 load: "POSTWORLD"

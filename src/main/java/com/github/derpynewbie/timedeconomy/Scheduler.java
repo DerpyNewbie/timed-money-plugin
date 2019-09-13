@@ -11,12 +11,12 @@ public abstract class Scheduler implements Runnable {
 
     private static HashMap<Player, Integer> schedulers = new HashMap<>();
 
-    private final Player PLAYER;
-    private final String MESSAGE;
-    private final Long TICK;
-    private Integer taskId;
+    protected final Player PLAYER;
+    protected final String MESSAGE;
+    protected final Long TICK;
+    protected Integer taskId;
 
-    public Scheduler(Player p, Long tick, Double money, String message) {
+    public Scheduler(Player p, Long tick, String message) {
         this.PLAYER = p;
         this.TICK = tick;
         this.MESSAGE = message;

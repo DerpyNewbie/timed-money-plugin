@@ -39,14 +39,14 @@ public abstract class Scheduler implements Runnable {
         return taskId;
     }
 
-    public boolean deleteTask(Player _player) {
+    public static boolean deleteTask(Player _player) {
         Integer _taskId = schedulers.get(_player);
         Bukkit.getScheduler().cancelTask(_taskId);
         return schedulers.remove(_player, _taskId);
     }
 
-    public boolean deleteTask(Scheduler _scheduler) {
-        return this.deleteTask(_scheduler.PLAYER);
+    public static boolean deleteTask(Scheduler _scheduler) {
+        return deleteTask(_scheduler.PLAYER);
     }
 
 }

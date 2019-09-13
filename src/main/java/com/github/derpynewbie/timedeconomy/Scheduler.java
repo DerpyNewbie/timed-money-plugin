@@ -1,6 +1,5 @@
 package com.github.derpynewbie.timedeconomy;
 
-import jdk.internal.jline.internal.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -22,7 +21,6 @@ public abstract class Scheduler implements Runnable {
         this.MESSAGE = message;
     }
 
-    @Nullable
     public static Integer getPlayerTimer(Player p) {
         return schedulers.get(p);
     }

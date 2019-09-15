@@ -64,13 +64,11 @@ public class TimedMoney extends JavaPlugin implements Listener {
     }
 
     private boolean setupEconomy() {
-//        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-//            return false;
-//        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
+        if (getServer().getPluginManager().getPlugin("Vault") == null)
             return false;
-        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null)
+            return false;
         econ = rsp.getProvider();
         return econ != null;
     }

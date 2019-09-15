@@ -1,4 +1,4 @@
-main: "com.github.derpynewbie.timedeconomy.TimedMoney"
+main: "com.github.derpynewbie.timedmoney.TimedMoney"
 name: "TimedEconomy"
 author: "DerpyNewbie"
 website: "https://github.com/derpynewbie"

@@ -81,8 +81,9 @@ public class TimedMoney extends JavaPlugin implements Listener {
                 EconomyResponse r = getEconomy().depositPlayer(PLAYER, bal);
                 // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
 
-                if (r.transactionSuccess() && !MESSAGE.isEmpty())
-                    PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
+                if (r.transactionSuccess())
+                    if (!MESSAGE.isEmpty())
+                        PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
                 else
                     getLogger().severe(r.errorMessage);
             }

@@ -1,6 +1,7 @@
 package com.github.derpynewbie.timedmoney;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,21 +41,16 @@ public class TimedMoney extends JavaPlugin implements Listener {
         }
         setupConfig();
         Bukkit.getPluginManager().registerEvents(this, this);
+
+        for (Player p :
+                Bukkit.getOnlinePlayers()) {
+            setSchedulerOnPlayer(p);
+        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Scheduler scheduler = new Scheduler(event.getPlayer(), config.getLong("tick"), config.getString("message")) {
-            @Override
-            public void run() {
-                double bal = config.getDouble("balance");
-                getEconomy().bankDeposit(PLAYER.getName(), bal);
-                // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
-                PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
-            }
-        };
-
-        scheduler.schedule();
+        setSchedulerOnPlayer(event.getPlayer());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -77,6 +73,24 @@ public class TimedMoney extends JavaPlugin implements Listener {
         }
         econ = rsp.getProvider();
         return econ != null;
+    }
+
+    private void setSchedulerOnPlayer(Player p) {
+        Scheduler scheduler = new Scheduler(p, config.getLong("tick"), config.getString("message")) {
+            @Override
+            public void run() {
+                double bal = config.getDouble("balance");
+                EconomyResponse r = getEconomy().depositPlayer(PLAYER, bal);
+                // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
+
+                if (r.transactionSuccess())
+                    PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
+                else
+                    getLogger().severe(r.errorMessage);
+            }
+        };
+
+        scheduler.schedule();
     }
 
     public static Economy getEconomy() {

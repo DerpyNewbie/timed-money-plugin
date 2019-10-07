@@ -6,7 +6,7 @@
   <groupId>com.github.derpynewbie</groupId>
   <artifactId>timed-money</artifactId>
   <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>

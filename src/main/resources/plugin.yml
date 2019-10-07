@@ -5,5 +5,5 @@ website: "https://github.com/derpynewbie"
 description: "Gives players money each configurable ticks"
 depend: [Vault]
 load: "POSTWORLD"
-version: "1.0.0"
+version: "1.0.1-SNAPSHOT"
 api-version: "1.14"

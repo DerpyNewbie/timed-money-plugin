@@ -13,10 +13,12 @@ public abstract class Scheduler implements Runnable {
     protected final Player PLAYER;
     protected final String MESSAGE;
     protected final Long TICK;
+    protected double bal;
     protected Integer taskId;
 
-    public Scheduler(Player p, Long tick, String message) {
+    public Scheduler(Player p, double defBal, Long tick, String message) {
         this.PLAYER = p;
+        this.bal = defBal;
         this.TICK = tick;
         this.MESSAGE = message;
     }

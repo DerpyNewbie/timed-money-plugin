@@ -1,6 +1,18 @@
-# The time until player gets balance
+# LONG! The time until player gets balance
 tick: 1200
-# The balance in double
+# DOUBLE! The default balance
 balance: 1
-# The message when balance sent (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
+# STRING! The message when balance sent (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
 message: "&aYou have received %2$1.1f by playing %4$1.0f minutes!"
+#
+# The permission node for permission-balance is "timed-money.specific.<max-amount>"!
+#
+permission-balance:
+  # BOOLEAN! The permission-specific balance! set this to true to use!
+  enable: false
+  # BOOLEAN! If true, it will check permission each timer tick! enabling this causes server lag!
+  refresh: false
+  # INTEGER! The maximum value on permission for permission specific balance. setting this higher will cause server lag!
+  max: 100
+  # DOUBLE! The value dividing permission value! for example, "timed-money.specific.10" with "divide-with: 100" will give player 0.1$ each timer!
+  divide-with: 100

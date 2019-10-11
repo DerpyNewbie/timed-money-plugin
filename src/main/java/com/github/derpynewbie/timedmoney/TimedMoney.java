@@ -73,11 +73,40 @@ public class TimedMoney extends JavaPlugin implements Listener {
         return econ != null;
     }
 
+    private double getSpecificPlayerMoneyAmount(Player p) {
+        int permValue = -1;
+        for (int i = 1; i < config.getInt("permission-balance.max"); i++) {
+            if (p.hasPermission("timed-money.specific." + i))
+                permValue = i;
+        }
+        if (permValue == -1)
+            return config.getDouble("balance");
+
+        return permValue / config.getDouble("permission-balance.divide-with");
+    }
+
+    private double getDefaultBal(Player p) {
+        if (config.getBoolean("permission-balance.enable"))
+            return getSpecificPlayerMoneyAmount(p);
+        else
+            return config.getDouble("balance");
+    }
+
+    private double refreshBal(Player p, double current) {
+        if (config.getBoolean("permission-balance.refresh"))
+            return getDefaultBal(p);
+        else
+            return current;
+    }
+
     private void setSchedulerOnPlayer(Player p) {
-        Scheduler scheduler = new Scheduler(p, config.getLong("tick"), config.getString("message")) {
+        Scheduler scheduler = new Scheduler(p, getDefaultBal(p), config.getLong("tick"), config.getString("message")) {
             @Override
             public void run() {
-                double bal = config.getDouble("balance");
+                bal = refreshBal(p, bal);
+                if (bal <= 0)
+                    return;
+
                 EconomyResponse r = getEconomy().depositPlayer(PLAYER, bal);
                 // (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
 

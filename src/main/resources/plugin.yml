@@ -1,5 +1,5 @@
 main: "com.github.derpynewbie.timedmoney.TimedMoney"
-name: "TimedEconomy"
+name: "TimedMoney"
 author: "DerpyNewbie"
 website: "https://github.com/derpynewbie"
 description: "Gives players money each configurable ticks"

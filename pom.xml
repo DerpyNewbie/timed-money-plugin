@@ -12,7 +12,7 @@
     <groupId>com.github.derpynewbie</groupId>
     <artifactId>timed-money</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.0-SNAPSHOT-${buildNumber}</version>
+    <version>1.2.0-${buildNumber}</version>
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <resources>

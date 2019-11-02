@@ -105,7 +105,7 @@ public class TimedMoney extends JavaPlugin implements Listener {
         Scheduler scheduler = new Scheduler(p, getDefaultBal(p), config.getLong("tick"), config.getString("message"), config.getString("anti-afk.message")) {
             @Override
             public void run() {
-                if (config.getBoolean("anti-afk") && lastLocation.equals(p.getLocation())) {
+                if (config.getBoolean("anti-afk.enable") && lastLocation.equals(p.getLocation())) {
                     if (!AFK_MESSAGE.isEmpty())
                         PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(AFK_MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
                     return;

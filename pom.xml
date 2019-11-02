@@ -58,7 +58,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <doCheck>true</doCheck>
+                    <doCheck>false</doCheck>
                     <doUpdate>true</doUpdate>
                     <shortRevisionLength>6</shortRevisionLength>
                 </configuration>

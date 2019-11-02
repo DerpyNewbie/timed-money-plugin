@@ -5,6 +5,14 @@ balance: 1
 # STRING! The message when balance sent (1st arg = display name[String], 2nd arg = balance[double], 3rd arg = time in seconds[double], 4th arg = time in minutes[double])
 message: "&aYou have received %2$1.1f by playing %4$1.0f minutes!"
 #
+# The anti-afk system
+#
+anti-afk:
+  # BOOLEAN! The boolean to disable giving afk people money or not!
+  enable: true
+  # STRING! The message when balance will not sent to player because they are afk! this can be empty to not sending! (format argument same as "message" configuration)
+  message: ""
+#
 # The permission node for permission-balance is "timed-money.specific.<max-amount>"!
 #
 permission-balance:

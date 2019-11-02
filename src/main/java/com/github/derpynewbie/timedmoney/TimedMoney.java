@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@SuppressWarnings("WeakerAccess")
 public class TimedMoney extends JavaPlugin implements Listener {
 
     private static Economy econ = null;
@@ -63,6 +64,7 @@ public class TimedMoney extends JavaPlugin implements Listener {
         config = getConfig();
     }
 
+    @SuppressWarnings("ConstantConditions")
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null)
             return false;
@@ -100,9 +102,15 @@ public class TimedMoney extends JavaPlugin implements Listener {
     }
 
     private void setSchedulerOnPlayer(Player p) {
-        Scheduler scheduler = new Scheduler(p, getDefaultBal(p), config.getLong("tick"), config.getString("message")) {
+        Scheduler scheduler = new Scheduler(p, getDefaultBal(p), config.getLong("tick"), config.getString("message"), config.getString("anti-afk.message")) {
             @Override
             public void run() {
+                if (config.getBoolean("anti-afk") && lastLocation.equals(p.getLocation())) {
+                    if (!AFK_MESSAGE.isEmpty())
+                        PLAYER.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(AFK_MESSAGE, PLAYER.getDisplayName(), bal, (double) TICK / 20D, (double) TICK / 20D / 60D)));
+                    return;
+                }
+
                 bal = refreshBal(p, bal);
                 if (bal <= 0)
                     return;
@@ -116,6 +124,8 @@ public class TimedMoney extends JavaPlugin implements Listener {
                 } else {
                     getLogger().severe("Transaction failed. Caused by: " + r.errorMessage);
                 }
+
+                lastLocation = p.getLocation();
             }
         };
 
